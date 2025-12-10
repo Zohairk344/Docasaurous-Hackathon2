@@ -1,0 +1,63 @@
+/**
+ * CSS files with the .module.css suffix will be treated as CSS modules
+ * and scoped locally.
+ */
+
+.heroBanner {
+  padding: 8rem 0; /* Increased vertical padding */
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background-image: linear-gradient(135deg, var(--ifm-color-primary-darkest), var(--ifm-color-primary-lightest)); /* Gradient background */
+  color: var(--ifm-color-white); /* Ensure text is visible on dark background */
+}
+
+.heroBanner :global(.hero__title) {
+  font-size: 3.5rem; /* Larger title */
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.heroBanner :global(.hero__subtitle) {
+  font-size: 1.75rem; /* Larger subtitle */
+  font-weight: 400;
+  margin-bottom: 2.5rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0.9;
+}
+
+
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    padding: 4rem 0; /* Adjust padding for smaller screens */
+  }
+  .heroBanner :global(.hero__title) {
+    font-size: 2.5rem;
+  }
+  .heroBanner :global(.hero__subtitle) {
+    font-size: 1.25rem;
+  }
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem; /* Space between buttons if multiple */
+  margin-top: 2rem;
+}
+
+.buttons :global(.button--secondary) {
+  --ifm-button-color: var(--ifm-color-primary-darkest); /* Button text color */
+  --ifm-button-background-color: var(--ifm-color-white); /* Button background */
+  --ifm-button-hover-color: var(--ifm-color-white); /* Hover text color */
+  --ifm-button-hover-background-color: var(--ifm-color-primary-dark); /* Hover background */
+  --ifm-button-border-color: var(--ifm-color-white);
+  --ifm-button-hover-border-color: var(--ifm-color-primary-dark);
+  font-size: 1.1rem;
+  padding: 0.8rem 1.8rem;
+  border-radius: var(--ifm-border-radius); /* Use Infima border-radius */
+  transition: all 0.3s ease;
+}

@@ -1,0 +1,15 @@
+# This file is for the agent in `backend/src/agent`
+# It has conflicting dependencies with the main FastAPI app and must be run
+# in a separate virtual environment.
+
+python-dotenv
+cohere
+qdrant-client
+trafilatura
+
+# These are the packages that cause conflicts
+# They require older versions of pydantic, openai, etc.
+chainlit
+agents
+openai<0.28.0
+pydantic<2.0.0

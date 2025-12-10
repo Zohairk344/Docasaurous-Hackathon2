@@ -1,0 +1,128 @@
+.wrapper {
+  margin-bottom: 2rem;
+  display: block;
+}
+
+.container {
+  display: flex;
+  gap: 12px;
+  padding: 0.75rem 1rem;
+  background: rgba(30, 30, 35, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  backdrop-filter: blur(12px);
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+}
+
+.activeHeader {
+  background: rgba(0, 0, 0, 0.8);
+  border-color: #444;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.iconBox {
+  width: 36px;
+  height: 36px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Buttons */
+.buttonGroup {
+  display: flex;
+  gap: 8px;
+}
+
+.actionBtn, .resetBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: white;
+  height: 36px;
+}
+
+/* Colors */
+.personalizeBtn {
+  background: rgba(0, 243, 255, 0.1);
+  border-color: rgba(0, 243, 255, 0.2);
+  color: #00f3ff;
+}
+.personalizeBtn:hover {
+  background: rgba(0, 243, 255, 0.2);
+  box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
+}
+
+.translateBtn {
+  background: rgba(0, 255, 136, 0.1);
+  border-color: rgba(0, 255, 136, 0.2);
+  color: #00ff88;
+}
+.translateBtn:hover {
+  background: rgba(0, 255, 136, 0.2);
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.2);
+}
+
+.resetBtn {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+.resetBtn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* The Result Area */
+.resultContainer {
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.3); /* Slightly darker background for focus */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: none;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  min-height: 500px;
+  animation: slideDown 0.4s ease-out;
+}
+
+.footerNote {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  text-align: center;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.link {
+  color: #00f3ff;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin { 100% { transform:rotate(360deg); } }
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
