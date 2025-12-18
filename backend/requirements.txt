@@ -12,3 +12,4 @@ starlette>=0.47.2
 email-validator
 openai
 requests-oauthlib
+pydantic-settings
