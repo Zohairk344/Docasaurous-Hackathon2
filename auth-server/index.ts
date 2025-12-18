@@ -55,5 +55,5 @@ app.on(["POST", "GET"], "/api/auth/**", (c) => {
 console.log("Auth Server running on http://localhost:4000");
 serve({
   fetch: app.fetch,
-  port: Number(process.env.PORT) || 4000, // Good practice to use PORT var
+  port: Number(process.env.PORT) || 4000,
 });
