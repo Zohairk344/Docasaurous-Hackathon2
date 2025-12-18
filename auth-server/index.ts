@@ -34,12 +34,22 @@ const pool = new Pool({
 });
 
 // --- 3. BETTER AUTH CONFIG ---
+// --- 3. BETTER AUTH CONFIG ---
 export const auth = betterAuth({
   database: pool,
   emailAndPassword: {
     enabled: true,
   },
   trustedOrigins: allowedOrigins,
+  
+  // 👇 NEW SECTION: FORCE COOKIES TO WORK ACROSS DOMAINS
+  advanced: {
+    defaultCookieAttributes: {
+      sameSite: "none", 
+      secure: true,
+    },
+  },
+
   user: {
     additionalFields: {
       softwareExperience: { type: "string", required: false },
