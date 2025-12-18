@@ -9,11 +9,16 @@ dotenv.config();
 
 const app = new Hono();
 
-// 1. Configure CORS to allow your Docusaurus frontend
+// --- NEW: Read allowed origins from Environment Variable ---
+const allowedOrigins = process.env.TRUSTED_ORIGINS
+  ? process.env.TRUSTED_ORIGINS.split(",") 
+  : ["http://localhost:3000"]; // Fallback if variable is missing
+
+// 1. Configure CORS dynamically
 app.use(
   "*",
   cors({
-    origin: ["http://localhost:3000"], // Your Docusaurus URL
+    origin: allowedOrigins, // <--- NOW IT USES YOUR RAILWAY VARIABLE
     allowHeaders: ["Content-Type", "Authorization"],
     allowMethods: ["POST", "GET", "OPTIONS"],
     exposeHeaders: ["Set-Cookie"],
@@ -21,18 +26,18 @@ app.use(
   })
 );
 
-// 2. Setup Database Connection (Same Neon DB as Python)
+// 2. Setup Database Connection
 const pool = new Pool({
-  connectionString: process.env.NEON_DATABASE_URL, // <--- To this
+  connectionString: process.env.NEON_DATABASE_URL,
 });
 
 // 3. Initialize Better Auth
-export const auth = betterAuth({ 
+export const auth = betterAuth({
   database: pool,
   emailAndPassword: {
     enabled: true,
   },
-  trustedOrigins: ["http://localhost:3000"], 
+  trustedOrigins: allowedOrigins, // <--- UPDATED HERE TOO
   user: {
     additionalFields: {
       softwareExperience: { type: "string", required: false },
@@ -49,5 +54,5 @@ app.on(["POST", "GET"], "/api/auth/**", (c) => {
 console.log("Auth Server running on http://localhost:4000");
 serve({
   fetch: app.fetch,
-  port: 4000,
+  port: Number(process.env.PORT) || 4000, // Good practice to use PORT var
 });
