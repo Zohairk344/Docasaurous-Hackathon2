@@ -29,6 +29,7 @@ app.use(
 // 2. Setup Database Connection
 const pool = new Pool({
   connectionString: process.env.NEON_DATABASE_URL,
+  ssl: true, 
 });
 
 // 3. Initialize Better Auth
