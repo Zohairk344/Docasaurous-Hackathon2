@@ -51,11 +51,14 @@ app.on(["POST", "GET"], "/api/auth/**", (c) => {
 });
 
 // --- 4. DYNAMIC PORT (Required for Railway) ---
+// If Railway gives us a PORT, use it. If not, use 4000.
 const port = Number(process.env.PORT) || 4000;
 
-console.log(`Auth Server running on port ${port}`);
+console.log(`Auth Server starting on port: ${port}`);
 
 serve({
   fetch: app.fetch,
-  port: port, // 👈 CRITICAL: Must use the variable, not just 4000
+  port: port, // 👈 CRITICAL: Must use the variable
 });
+
+// Force git update 1
