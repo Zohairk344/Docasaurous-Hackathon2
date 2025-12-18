@@ -101,8 +101,8 @@ export default function ChapterTools() {
 
     try {
       const endpoint = action === 'personalize' 
-        ? 'http://127.0.0.1:8000/api/rag/personalize'
-        : 'http://127.0.0.1:8000/api/rag/translate';
+        ? 'https://renewed-courtesy-production.up.railway.app/api/rag/personalize'
+        : 'https://renewed-courtesy-production.up.railway.app/api/rag/translate';
 
       const response = await fetch(endpoint, {
         method: 'POST',

@@ -28,7 +28,7 @@ USERINFO_URL = f"{BETTER_AUTH_BASE_URL}/oauth2/userinfo"
 
 
 # This must match the redirect_uri configured in your Better Auth app
-REDIRECT_URI = "http://127.0.0.1:8000/api/auth/callback"
+REDIRECT_URI = "https://renewed-courtesy-production.up.railway.app/api/auth/callback"
 
 
 router = APIRouter()

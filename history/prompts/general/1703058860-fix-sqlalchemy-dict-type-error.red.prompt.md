@@ -21,7 +21,7 @@ tests_yaml: []
 prompt_text: |-
   hey gemini can you fix this error.                                   (venv) C:\Users\zohai\Desktop\IT Course\AI\spec-kit\hackathon3\backend>uvicorn src.main:app --reload
   INFO:     Will watch for changes in these directories: ['C:\\Users\\zohai\\Desktop\\IT Course\\AI\\spec-kit\\hackathon3\\backend']
-  INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+  INFO:     Uvicorn running on https://renewed-courtesy-production.up.railway.app (Press CTRL+C to quit)
   INFO:     Started reloader process [20204] using WatchFiles
   Process SpawnProcess-1:
   Traceback (most recent call last):
