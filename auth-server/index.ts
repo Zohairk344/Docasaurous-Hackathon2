@@ -9,16 +9,15 @@ dotenv.config();
 
 const app = new Hono();
 
-// --- NEW: Read allowed origins from Environment Variable ---
+// --- 1. DYNAMIC ORIGINS (For Vercel + Localhost) ---
 const allowedOrigins = process.env.TRUSTED_ORIGINS
-  ? process.env.TRUSTED_ORIGINS.split(",") 
-  : ["http://localhost:3000"]; // Fallback if variable is missing
+  ? process.env.TRUSTED_ORIGINS.split(",")
+  : ["http://localhost:3000"];
 
-// 1. Configure CORS dynamically
 app.use(
   "*",
   cors({
-    origin: allowedOrigins, // <--- NOW IT USES YOUR RAILWAY VARIABLE
+    origin: allowedOrigins,
     allowHeaders: ["Content-Type", "Authorization"],
     allowMethods: ["POST", "GET", "OPTIONS"],
     exposeHeaders: ["Set-Cookie"],
@@ -26,19 +25,19 @@ app.use(
   })
 );
 
-// 2. Setup Database Connection
+// --- 2. SSL DATABASE CONNECTION (Required for Neon) ---
 const pool = new Pool({
   connectionString: process.env.NEON_DATABASE_URL,
-  ssl: true, 
+  ssl: true, // 👈 CRITICAL: Neon DB will reject connections without this
 });
 
-// 3. Initialize Better Auth
+// --- 3. BETTER AUTH CONFIG ---
 export const auth = betterAuth({
   database: pool,
   emailAndPassword: {
     enabled: true,
   },
-  trustedOrigins: allowedOrigins, // <--- UPDATED HERE TOO
+  trustedOrigins: allowedOrigins,
   user: {
     additionalFields: {
       softwareExperience: { type: "string", required: false },
@@ -47,13 +46,16 @@ export const auth = betterAuth({
   },
 });
 
-// 4. Mount Auth Routes
 app.on(["POST", "GET"], "/api/auth/**", (c) => {
   return auth.handler(c.req.raw);
 });
 
-console.log("Auth Server running on http://localhost:4000");
+// --- 4. DYNAMIC PORT (Required for Railway) ---
+const port = Number(process.env.PORT) || 4000;
+
+console.log(`Auth Server running on port ${port}`);
+
 serve({
   fetch: app.fetch,
-  port: Number(process.env.PORT) || 4000,
+  port: port, // 👈 CRITICAL: Must use the variable, not just 4000
 });
