@@ -28,7 +28,9 @@ app.use(
 // --- 2. SSL DATABASE CONNECTION (Required for Neon) ---
 const pool = new Pool({
   connectionString: process.env.NEON_DATABASE_URL,
-  ssl: true, // 👈 CRITICAL: Neon DB will reject connections without this
+  ssl: {
+    rejectUnauthorized: false, // 👈 THE FIX: Allows connection even if certificates vary
+  },
 });
 
 // --- 3. BETTER AUTH CONFIG ---
